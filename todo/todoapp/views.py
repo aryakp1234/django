@@ -8,10 +8,16 @@ def index(request):
 
 
     if request.method=='POST':
-        if request.POST:
+        if  'submit' in request.POST:
             print(request.POST)
             todo_form=Todoform(request.POST)
             todo_form.save()
+        
+        elif 'delete' in request.POST:
+            key=request.POST.get('delete')
+            todo=Todo.objects.get(id=key)
+            todo.delete()
+
 
 
     todo=Todo.objects.all()
